@@ -1,7 +1,6 @@
 
   Feature: Ebay Home Page Scenarios
 
-    @Run
     Scenario: Advance Search Link
 
       Given I am on the Ebay Home Page
