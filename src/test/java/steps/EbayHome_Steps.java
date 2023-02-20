@@ -7,20 +7,24 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import static org.junit.Assert.fail;
+
 public class EbayHome_Steps {
 
-    WebDriver driver = new ChromeDriver();
+    WebDriver driver;
+
+    public EbayHome_Steps(Common_Steps common_steps){
+        this.driver = common_steps.getDriver();
+    }
 
     @Given("I am on the Ebay Home Page")
     public void i_am_on_the_ebay_home_page() {
-        System.setProperty("webdriver.chrome.driver", "webdriver/chromedriver");
         driver.get("https://www.ebay.com/");
         driver.manage().window().maximize();
     }
 
     @When("I click on Advance Link")
     public void i_click_on_advance_link() {
-        System.setProperty("webdriver.chrome.driver", "webdriver/chromedriver");
         driver.findElement(By.linkText("Advanced")).click();
     }
 
@@ -30,9 +34,7 @@ public class EbayHome_Steps {
         String actualUrl = driver.getCurrentUrl();
 
         if(!expectedUrl.equals(actualUrl)){
-            System.out.println("Page does not navigate to expected page");
+            fail("Page does not navigate to home page");
         }
-
-        driver.quit();
     }
 }

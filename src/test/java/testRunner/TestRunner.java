@@ -12,7 +12,7 @@ import org.junit.runner.RunWith;
         dryRun = false,
         monochrome = false
 //        tags = "@Run"
-        //name = {"Logo"}
+//        name = {"Logo"}
 )
 
 public class TestRunner {
