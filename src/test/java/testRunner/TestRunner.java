@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
         features = {"features"},
         glue = {"steps"},
         plugin = {"pretty","html:Report.html"},
-        dryRun = true,
+        dryRun = false,
         monochrome = false
 //        tags = "@Run"
         //name = {"Logo"}
