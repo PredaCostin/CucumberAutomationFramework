@@ -5,7 +5,6 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 import static org.junit.Assert.fail;
 
@@ -13,7 +12,7 @@ public class EbayHome_Steps {
 
     WebDriver driver;
 
-    public EbayHome_Steps(Common_Steps common_steps){
+    public EbayHome_Steps(Common_Steps common_steps) {
         this.driver = common_steps.getDriver();
     }
 
@@ -33,8 +32,18 @@ public class EbayHome_Steps {
         String expectedUrl = "https://www.ebay.com/sch/ebayadvsearch";
         String actualUrl = driver.getCurrentUrl();
 
-        if(!expectedUrl.equals(actualUrl)){
+        if (!expectedUrl.equals(actualUrl)) {
             fail("Page does not navigate to home page");
         }
+    }
+
+    @When("I search for iPhone 11")
+    public void i_search_for_i_phone() {
+
+    }
+
+    @Then("I validate at least 1000 search items present")
+    public void i_validate_at_least_search_items_present() {
+
     }
 }
