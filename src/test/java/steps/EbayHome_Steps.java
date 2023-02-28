@@ -72,4 +72,24 @@ public class EbayHome_Steps {
         driver.findElement(By.xpath("//input[@id='gh-btn']")).click();
         Thread.sleep(1000);
     }
+
+    @When("I click on {string}")
+    public void i_click_on(String string) throws InterruptedException {
+        driver.findElement(By.linkText(string)).click();
+        Thread.sleep(2000);
+    }
+
+    @Then("I validate that page navigate to {string} and title contains {string}")
+    public void i_validate_that_page_navigate_to_and_title_contains(String url, String title) {
+        String actualUrl = driver.getCurrentUrl();
+        String actualTitle = driver.getTitle();
+
+        if(!actualUrl.equals(url)){
+            fail("Page does navigate to expected url: " + url);
+        }
+
+        if(!actualTitle.contains(title)){
+            fail("Title mismatch");
+        }
+    }
 }
