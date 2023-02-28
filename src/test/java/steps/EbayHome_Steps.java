@@ -5,6 +5,9 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 import static org.junit.Assert.fail;
 
@@ -37,13 +40,36 @@ public class EbayHome_Steps {
         }
     }
 
-    @When("I search for iPhone 11")
-    public void i_search_for_i_phone() {
-
+    @When("I search for {string}")
+    public void i_search_for(String product) {
+        driver.findElement(By.xpath("//input[@id='gh-ac']")).sendKeys(product);
+        driver.findElement(By.xpath("//input[@id='gh-btn']")).click();
     }
 
-    @Then("I validate at least 1000 search items present")
-    public void i_validate_at_least_search_items_present() {
+    @Then("I validate at least {int} search items present")
+    public void i_validate_at_least_search_items_present(int count) {
+        String itemCount = driver.findElement(By.cssSelector("h1.srp-controls__count-heading>span.BOLD:first-child")).getText().trim();
+        String itemCount2 = itemCount.replace(",", "");
+        int intItemCount = Integer.parseInt(itemCount2);
 
+        if(!(intItemCount > count)){
+            fail("Less than 1000 results shown");
+        }
+    }
+
+    @When("I search for {string} in {string} category")
+    public void i_search_for_in_category(String string, String string2) throws InterruptedException {
+        driver.findElement(By.xpath("//input[@id='gh-ac']")).sendKeys(string);
+
+        List<WebElement> cat = driver.findElements(By.xpath("//select[@id='gh-cat']/option"));
+        for(WebElement option : cat ){
+            if(option.getText().trim().equals(string2)){
+                option.click();
+                break;
+            }
+        }
+
+        driver.findElement(By.xpath("//input[@id='gh-btn']")).click();
+        Thread.sleep(1000);
     }
 }
